@@ -1,9 +1,10 @@
 import { StatusBar } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { Text, ThemeProvider } from '@rneui/themed';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { ThemeProvider } from '@rneui/themed';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { Routes } from './src/routes';
 import { theme } from './src/theme';
 
 export default function App() {
@@ -11,17 +12,9 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <ThemeProvider theme={theme}>
-          <SafeAreaView
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <StatusBar />
+          <StatusBar />
 
-            <Text>Universal React with Expo</Text>
-          </SafeAreaView>
+          <Routes />
         </ThemeProvider>
       </NavigationContainer>
     </SafeAreaProvider>
