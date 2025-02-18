@@ -4,7 +4,19 @@
   "trailingComma": "all",
   "singleQuote": true,
   "semi": true,
-  "importOrder": ["<THIRD_PARTY_MODULES>", "^[./]"],
+  "importOrder": [
+    "^react(-native)?$",
+    "<THIRD_PARTY_MODULES>",
+    "@api/*",
+    "@assets/*",
+    "@components/*",
+    "@context/*",
+    "@screens/*",
+    "@storage/*",
+    "@theme/*",
+    "@types/*",
+    "^[./]"
+  ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "plugins": ["@trivago/prettier-plugin-sort-imports"]
