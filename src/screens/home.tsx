@@ -1,7 +1,9 @@
 import { View } from 'react-native';
 
-import { Text, useTheme } from '@rneui/themed';
+import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import Logo from '../assets/logo.svg';
 
 export const Home = () => {
   const { theme } = useTheme();
@@ -13,10 +15,18 @@ export const Home = () => {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 142,
+        gap: 100,
       }}
     >
-      <Text>Home</Text>
+      <View style={{ alignItems: 'center', gap: 16 }}>
+        <Logo color={theme.colors.primary} width={100} height={100} />
+        <Text logo>fÜd</Text>
+      </View>
+
+      <View style={{ gap: 16 }}>
+        <Button title="New recipe" />
+        <Button type="outline" title="View recipes" disabled />
+      </View>
     </SafeAreaView>
   );
 };
