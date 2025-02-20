@@ -1,12 +1,24 @@
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '../assets/logo.svg';
+import { Recipe, getRecipes } from '../storage';
 
 export const Home = () => {
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const { theme } = useTheme();
+
+  const getRecipesFromAsyncStorage = async () => {
+    const data = await getRecipes();
+    setRecipes(data);
+  };
+
+  useEffect(() => {
+    getRecipesFromAsyncStorage();
+  }, []);
 
   return (
     <SafeAreaView
@@ -25,7 +37,7 @@ export const Home = () => {
 
       <View style={{ gap: 16 }}>
         <Button title="New recipe" />
-        <Button type="outline" title="View recipes" disabled />
+        <Button type="outline" title="View recipes" disabled={!recipes} />
       </View>
     </SafeAreaView>
   );
