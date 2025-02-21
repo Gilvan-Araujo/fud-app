@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '@rneui/themed';
 
 import { Home } from '@screens/home';
+import { NewRecipe } from '@screens/new-recipe';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ export const Routes = () => {
         initialRouteName="home"
       >
         <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="new-recipe" component={NewRecipe} />
       </Stack.Navigator>
     </View>
   );
