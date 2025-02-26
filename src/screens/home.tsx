@@ -1,27 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '../assets/logo.svg';
-import { getAnyRecipeInStorage } from '../storage';
+import { getRecipes } from '../storage';
 
 export const Home = () => {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
-  const [recipesInStorage, setRecipesInStorage] = useState<Boolean>(false);
+  const [viewRecipesButtonDisabled, setViewRecipesButtonDisabled] =
+    useState<boolean>(false);
 
-  const getRecipesFromAsyncStorage = async () => {
-    const anyRecipe = await getAnyRecipeInStorage();
-    setRecipesInStorage(!!anyRecipe);
-  };
+  useFocusEffect(
+    useCallback(() => {
+      const getRecipesFromAsyncStorage = async () => {
+        const recipes = await getRecipes();
+        setViewRecipesButtonDisabled(!Boolean(recipes.length));
+      };
 
-  useEffect(() => {
-    getRecipesFromAsyncStorage();
-  }, []);
+      getRecipesFromAsyncStorage();
+
+      return () => {
+        console.log('Screen is unfocused!');
+      };
+    }, []),
+  );
 
   return (
     <SafeAreaView
@@ -46,7 +53,7 @@ export const Home = () => {
         <Button
           type="outline"
           title="View recipes"
-          disabled={!recipesInStorage}
+          disabled={viewRecipesButtonDisabled}
         />
       </View>
     </SafeAreaView>
