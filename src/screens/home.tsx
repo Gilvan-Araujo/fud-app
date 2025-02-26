@@ -6,17 +6,17 @@ import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '../assets/logo.svg';
-import { Recipe, getRecipes } from '../storage';
+import { getAnyRecipeInStorage } from '../storage';
 
 export const Home = () => {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipesInStorage, setRecipesInStorage] = useState<Boolean>(false);
 
   const getRecipesFromAsyncStorage = async () => {
-    const data = await getRecipes();
-    setRecipes(data);
+    const anyRecipe = await getAnyRecipeInStorage();
+    setRecipesInStorage(!!anyRecipe);
   };
 
   useEffect(() => {
@@ -43,7 +43,11 @@ export const Home = () => {
           title="New recipe"
           onPress={() => navigation.navigate('new-recipe')}
         />
-        <Button type="outline" title="View recipes" disabled={!recipes} />
+        <Button
+          type="outline"
+          title="View recipes"
+          disabled={!recipesInStorage}
+        />
       </View>
     </SafeAreaView>
   );
