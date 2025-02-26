@@ -7,7 +7,7 @@ export const theme = createTheme({
     error: '#FF1000',
     warning: '##FFA000',
     disabled: '#A0A0A0',
-    background: '#2B2F33',
+    background: '#000810',
   },
   lightColors: {
     primary: '#0080FF',
@@ -25,13 +25,19 @@ export const theme = createTheme({
         },
       };
     },
-    Text(props, _theme) {
+    Text(props, theme) {
       return {
         h3Style: { fontSize: 32 },
         style: {
           ...(props.logo && {
             fontSize: 40,
             fontFamily: 'RobotoMono_700Bold',
+          }),
+          ...(props.errorText && {
+            fontSize: 12,
+            marginTop: -16,
+            marginLeft: 12,
+            color: theme.colors.error,
           }),
         },
       };
