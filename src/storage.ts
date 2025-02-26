@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type Recipe = {
   name: string;
-  ingredients: Array<{ name: string; quantity: number }>;
+  ingredients: Array<{ name: string; quantity: number; measurement: string }>;
 };
 
 const RECIPES_KEY = 'fud:recipes';
@@ -25,6 +25,15 @@ export const getRecipes = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem(RECIPES_KEY);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    Alert.alert('Error', 'Failed to get recipes');
+  }
+};
+
+export const getAnyRecipeInStorage = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(RECIPES_KEY);
+    return jsonValue.length;
   } catch (e) {
     Alert.alert('Error', 'Failed to get recipes');
   }
