@@ -2,6 +2,7 @@ import { View } from 'react-native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '@rneui/themed';
+import ToastManager from 'toastify-react-native';
 
 import { Home } from '@screens/home';
 import { NewRecipe } from '@screens/new-recipe';
@@ -29,6 +30,13 @@ export const Routes = () => {
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="new-recipe" component={NewRecipe} />
       </Stack.Navigator>
+
+      <ToastManager
+        style={{ backgroundColor: theme.colors.grey5 }}
+        textStyle={{ color: theme.colors.black }}
+        position="bottom"
+        animationStyle="rightInOut"
+      />
     </View>
   );
 };
