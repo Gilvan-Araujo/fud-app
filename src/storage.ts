@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export type Recipe = {
   name: string;
   ingredients: Array<{ name: string; quantity: number; measurement: string }>;
+  id: string;
 };
 
 const STORAGE_KEY = '@fud:recipes';
